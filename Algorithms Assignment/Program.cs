@@ -17,27 +17,23 @@ namespace Application
         public static int[] numbersArray5;
         public static int[] numbersArray6;
 
-
         static void Main(string[] args) 
         {
+            // Initialises the read file method
             ReadFiles();
 
-            //int[] testArray = { 2, 5, 7, 1, 2 };
-
-            //InsertionSort(numbersArray4);
             InsertionSort(numbersArray1);
-            PrintArray(numbersArray1);
+            DisplayValueTen(numbersArray1);
+            DisplayValueFifty(numbersArray1);
             Search(numbersArray1);
 
-            //Search(numbersArray1);
-            //Search(numbersArray2);
-            //Search(numbersArray3);
         }
 
         // Reads the files
         static void ReadFiles()
         {
             string Share_1_256 = "C:\\Users\\UpInT\\Source\\Repos\\AlgorithmsandComplexity1\\Algorithms Assignment\\Share_1_256.txt";
+
             try
             {
                 string[] lines = File.ReadAllLines(Share_1_256);
@@ -146,7 +142,7 @@ namespace Application
             }
         }
 
-        // To sort array using insertion sort
+        // Sort array using insertion sort
         static void InsertionSort(int[] array)
         {
 
@@ -166,10 +162,34 @@ namespace Application
             }
         }
 
-        // Prints array
+        // Prints 10th value in an array
+        static void DisplayValueTen(int[] array)
+        {
+            Console.WriteLine("Every 10th Value:");
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i % 10 == 0)
+                    Console.Write(array[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        // Prints 50th value in an array
+        static void DisplayValueFifty(int[] array)
+        {
+            Console.WriteLine("Every 50th Value:");
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i % 50 == 0)
+                    Console.Write(array[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        // Print array
         static void PrintArray(int[] array)
         {
-            Console.WriteLine("Sorted Array:");
+            Console.WriteLine("Array:");
             foreach (int value in array)
                 Console.Write(value + " ");
             Console.WriteLine();
@@ -196,8 +216,39 @@ namespace Application
             }
             if (validList.Count > 0)
                 Console.WriteLine("Index Position: " + string.Join(", ", validList));
+            // Find the nearest value and its index
             else
-                Console.WriteLine($"'{searchedNumber}' was not found");
+            {
+                int nearestNumber = numbersArray[0];
+                int nearestIndex = 0;
+
+                for (int i = 0; i < numbersArray.Length; i++)
+                {
+                    // Use Math.Abs to gaurantee a positive number
+                    if (Math.Abs(searchedNumber - numbersArray[i]) < Math.Abs(searchedNumber - nearestNumber))
+                    {
+                        nearestNumber = numbersArray[i];
+                        nearestIndex = i;
+                    }
+                }
+                Console.WriteLine($"{searchedNumber} was not found. The closest value was {nearestNumber} at index {nearestIndex}");
+            }
+        }
+
+        // Merge two arrays
+        static void MergeTwoArrays(int[] array1, int[] array2)
+        {
+            int[] mergedArray = array1.Concat(array2).ToArray();
+
+            PrintArray(mergedArray);
+        }
+
+        // Merge three arrays
+        static void MergeThreeArrays(int[] array1, int[] array2, int[] array3)
+        {
+            int[] mergedArray = array1.Concat(array2).Concat(array3).ToArray();
+
+            PrintArray(mergedArray);
         }
     }
 }
