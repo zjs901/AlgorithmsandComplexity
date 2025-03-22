@@ -151,14 +151,12 @@ namespace Application
                 int temp = array[i]; // The element to be inserted
                 int j = i - 1;
 
-                // Move elements of arr[0..i-1] that are greater than key
-                // to one position ahead of their current position
                 while (j >= 0 && array[j] > temp)
                 {
                     array[j + 1] = array[j];
                     j--;
                 }
-                array[j + 1] = temp; // Insert the key in the correct position
+                array[j + 1] = temp; // Insert the temp number in the correct position
             }
         }
 
